@@ -11,8 +11,7 @@ module.exports = {
   },
   async getSingleUser(req, res) {
     try {
-      const user = await User.findOne({ _id: req.params.userId })
-        .select('-__v');
+      const user = await User.findOne({ _id: req.params.userId });
 
       if (!user) {
         return res.status(404).json({ message: 'No user with that ID' });
@@ -33,7 +32,7 @@ module.exports = {
     }
   },
 
-  // Delete a user and associated apps
+  // Delete a user
   async deleteUser(req, res) {
     try {
       const user = await User.findOneAndDelete({ _id: req.params.userId });
@@ -67,4 +66,39 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+  async addFriend(req, res) {
+    try {
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $addToSet: { friends: req.params.friendId  } },
+        { runValidators: true, new: true }
+      );
+
+      if (!user) {
+        return res.status(404).json({ message: 'No user with this id!' });
+      }
+
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+  async deleteFriend(req, res) {
+    try {
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $pull: { friends: req.parama.friendId } },
+        { runValidators: true, new: true },
+      );
+
+      if (!user) {
+        return res.status(404).json({ message: 'No friend with this id!' });
+      }
+
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
 }
