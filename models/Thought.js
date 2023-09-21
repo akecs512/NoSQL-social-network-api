@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const Reaction = require('./Reaction');
+// const Reaction = require('./Reaction');
 
 
 // Schema to create Post model
@@ -21,7 +21,7 @@ const thoughtSchema = new Schema(
     },
 
   
-    reactions: [Reaction],
+    // reactions: [Reaction],
   },
   {
     toJSON: {
@@ -30,6 +30,13 @@ const thoughtSchema = new Schema(
     id: false,
   }
 );
+
+// thoughtSchema
+//   .virtual('reactionCount')
+//   // Getter
+//   .get(function () {
+//     return this.reaction.length;
+//   });
 
 const Thought = model('thought', thoughtSchema);
 
