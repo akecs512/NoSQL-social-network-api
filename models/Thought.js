@@ -31,12 +31,12 @@ const thoughtSchema = new Schema(
   { versionKey: false }
 )
 
-// thoughtSchema
-//   .virtual('reactionCount')
-//   // Getter
-//   .get(function () {
-//     return this.reaction.length;
-//   });
+thoughtSchema
+  .virtual('reactionCount')
+  // Getter
+  .get(function () {
+    return this.reactions.length;
+  });
 
 const Thought = model("thought", thoughtSchema);
 
