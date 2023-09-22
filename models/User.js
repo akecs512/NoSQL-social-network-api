@@ -18,7 +18,8 @@ const userSchema = new Schema(
       ref: 'user',
     },
   ],
-  } ,    
+  } ,   
+  { versionKey: false }, 
 {
   
 toJSON: {

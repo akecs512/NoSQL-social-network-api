@@ -27,8 +27,9 @@ const thoughtSchema = new Schema(
       getters: true,
     },
     id: false,
-  }
-);
+  },
+  { versionKey: false }
+)
 
 // thoughtSchema
 //   .virtual('reactionCount')
