@@ -29,10 +29,10 @@ const thoughtSchema = new Schema(
     id: false,
   },
   { versionKey: false }
-)
+);
 
 thoughtSchema
-  .virtual('reactionCount')
+  .virtual("reactionCount")
   // Getter
   .get(function () {
     return this.reactions.length;
